@@ -31,7 +31,7 @@ if ($stmt = $connection->prepare('SELECT id, password FROM users WHERE username 
             $_SESSION['loggedin'] = TRUE;
             $_SESSION['username'] = $_POST['username'];
             $_SESSION['id'] = $id;
-            header('Location: inventory.php');
+            header('Location: products');
         } else {
             // Incorrect password
             echo 'Incorrect username and/or password!';

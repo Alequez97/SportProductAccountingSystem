@@ -1,8 +1,5 @@
 <?php
 
-include_once("interfaces/IDatabaseConnection.php");
-include_once("interface/IDatabaseWorker.php");
-
 class DatabaseWorker implements IDatabaseWorker
 {
     private $db;

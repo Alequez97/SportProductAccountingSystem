@@ -1,7 +1,5 @@
 <?php
 
-include_once("interfaces/IDatabaseConnection.php");
-
 class MySqlDatabaseConnection implements IDatabaseConnection
 {
 
@@ -85,17 +83,20 @@ class MySqlDatabaseConnection implements IDatabaseConnection
   {
     if (empty($properties)) return false;
 
-    $query = "UPDATE $tableName SET ";
+    $query = "UPDATE `$tableName` SET ";
 
     $setProperties = "";
 
     foreach ($properties as $x => $x_value) {
-      $setProperties .= $x . "=" . $x_value . ", ";
+      $setProperties .= $x . "='" . $x_value . "', ";
     }
 
     $setProperties = substr($setProperties, 0, -2);   //remove unneseccary space and coma
     $query .= $setProperties;
-    $query .= "WHERE id=$id";
+    $query .= " WHERE id=$id";
+
+    $result = $this->connection->query($query);
+    return $result;
   }
 
   public function DeleteData(string $tableName, int $entityId)

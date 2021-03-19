@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+if (isset($_SESSION['loggedin']))
+{
+	if ($_SESSION['loggedin'] == true) header("Location: products");
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -20,7 +30,7 @@
 				</label>
 				<input type="password" name="password" placeholder="Password" id="password" required>
 				<input type="password" name="passwordHash" style="display: none;">
-				<input type="submit" value="Login" onclick="generateHash()">
+				<input type="submit" value="Login">
 			</form>
 		</div>
 	</body>
