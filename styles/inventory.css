@@ -1,13 +1,11 @@
-.container {
+.table-wrapper {
     width: 70%;
     position: relative;
     margin: 0 auto;
 }
 
-.table-wrapper {
-    width: 70%;
-    position: relative;
-    margin: 0 auto;
+table {
+	width: 100%;
 }
 
 table, th, td {
@@ -77,20 +75,4 @@ td {
 	td:nth-of-type(4):before { content: "Details"; }
 	td:nth-of-type(5):before { content: "Action"; }
 
-}
-
-.text-center {
-    text-align: center;
-}
-.center {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-h1 {
-    font-family: 'Courier New', monospace;  
-}
-
-.border {
-    border: 1px solid black;
 }

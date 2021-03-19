@@ -26,6 +26,14 @@
   .topnav .icon {
     display: none;
   }
+
+  #logout {
+    float: right;
+  }
+
+  #logout:hover {
+    background-color: lightcoral;
+  }
   
   @media screen and (max-width: 600px) {
     .topnav {
@@ -40,6 +48,11 @@
 
     .topnav a:not(:first-child) {
         display: none;
+    }
+
+    .topnav #logout{
+      background-color: lightcoral;
+      display: none;
     }
 
     .topnav a.icon {
@@ -58,7 +71,8 @@
       right: 0;
       top: 0;
     }
-    .topnav.responsive a {
+
+    .topnav.responsive a, .topnav.topnav.responsive #logout {
       float: none;
       display: block;
       text-align: center;
