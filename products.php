@@ -1,21 +1,20 @@
 <?php
-    session_start();
-    if (!isset($_SESSION['loggedin']))
-    {
-        header('Location: index');
-        exit;
-    }
+session_start();
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: index');
+    exit;
+}
 
-    include_once("backend/services/DatabaseWorkerFactory.php");
+include_once("backend/services/DatabaseWorkerFactory.php");
 
-    include_once("backend/interfaces/IDatabaseConnection.php");
-    include_once("backend/database/MySqlDatabaseConnection.php");
+include_once("backend/interfaces/IDatabaseConnection.php");
+include_once("backend/database/MySqlDatabaseConnection.php");
 
-    include_once("backend/interfaces/IDatabaseWorker.php");
-    include_once("backend/services/DatabaseWorker.php");    
-    
-    $dbWorker = DatabaseWorkerFactory::GetMySqlDatabaseWorker("localhost", "root", "", "jurec_sanja");
-    $products = $dbWorker->ReadAll("products");
+include_once("backend/interfaces/IDatabaseWorker.php");
+include_once("backend/services/DatabaseWorker.php");
+
+$dbWorker = DatabaseWorkerFactory::GetMySqlDatabaseWorker("localhost", "root", "", "jurec_sanja");
+$products = $dbWorker->ReadAll("products");
 ?>
 
 <!DOCTYPE html>
@@ -46,13 +45,10 @@
 
     <?php
 
-        if (empty($products))
-        {
-            echo "<h2 class=\"text-center\">No products added!</h2>";
-        }
-        else
-        {
-            echo "<div class=\"container\">
+    if (empty($products)) {
+        echo "<h2 class=\"text-center\">No products added!</h2>";
+    } else {
+        echo "<div class=\"container\">
             <h1 class=\"text-center\">Products</h1>
             <div>
                 <div class=\"table-wrapper\">
@@ -77,9 +73,8 @@
                             </tr>
                         </thead>
                         <tbody>";
-                foreach($products as $product)
-                {
-                    echo "<tr>
+        foreach ($products as $product) {
+            echo "<tr>
                             <td>
                                 $product->name
                             </td>
@@ -97,8 +92,14 @@
                                 <button>Delete</button>
                             </td>
                         </tr>";
-                }
         }
+
+        echo "</tbody>";
+        echo "</table>";
+        echo "</div>";
+        echo "</div>";
+        echo "</div>";
+    }
 
     ?>
 </body>
