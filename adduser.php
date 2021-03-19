@@ -19,7 +19,8 @@ if (isset($_GET["username"], $_GET["password"]))
     {
         $dbWorker = DatabaseWorkerFactory::GetMySqlDatabaseWorker("localhost", "root", "", "jurec_sanja");
         $result = $dbWorker->Create("users", ["username" => $username, "password" => $hash]);
-        echo "User successfully added";
+        if ($result) echo "User successfully added";
+        else echo "Error when adding user";
     }
     catch (Exception $e)
     {

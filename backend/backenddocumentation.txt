@@ -1,0 +1,41 @@
+Для того, чтобы работать с базой сначала импортируй файлы туда, где понадобится в том порядке, в котором тут:
+
+include_once("backend/services/DatabaseWorkerFactory.php");
+include_once("backend/interfaces/IDatabaseConnection.php");
+include_once("backend/database/MySqlDatabaseConnection.php");
+include_once("backend/interfaces/IDatabaseWorker.php");
+include_once("backend/services/DatabaseWorker.php");
+
+Интерфейсы должны быть объявлены раньше классов, я сегодня минут 20 пытался понять в чем прикол :D
+
+Путь может отличаться в зависимости от того, в какой директории импортишь.
+
+Потом вызываешь статический метод на классе DatabaseWorkerFactory c названием GetMySqlDatabaseWorker
+Синтаскис примерно такой:
+
+$dbWorker = DatabaseWorkerFactory::GetMySqlDatabaseWorker("localhost", "root", "", "db_name");
+
+У объекта воркер будут все CRUD операции.
+
+    public function Create(string $tableName, array $properties);
+    public function Read(string $tableName, int $id);
+    public function ReadAll(string $tableName);
+    public function Update(string $tableName, int $id, array $properties);
+    public function Delete(string $tableName, int $id);
+    public function ExecuteQuery(string $query);
+
+Пример использования:
+
+    $singleRecord = $dbWorker->Read("products", 2);
+    $allRecords = $dbWorker->ReadAll("products");
+
+Там где нужно вставлять поля используй ассоциативный массив.
+Например чтобы вставить новую запись или обновить существующую синтаскис будет такой:
+
+$result = $dbWorker->Create("products", ["name" => "shtanga", "price" => "bezcenna"]);
+
+Для Update указываешь еще индекс. $dbWorker->Update("products", 2, ["name" => "shtanga", "price" => "bezcenna"]);
+
+С Delete думаю всё понятно.
+
+Есть еще метод ExecuteQuery, если надо более сложные запросы, но пока нам оснонвых должно хватить.
