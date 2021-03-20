@@ -1,8 +1,7 @@
 <?php
 
 session_start();
-if (isset($_SESSION['loggedin']))
-{
+if (isset($_SESSION['loggedin'])) {
 	if ($_SESSION['loggedin'] == true) header("Location: products");
 }
 
@@ -10,28 +9,28 @@ if (isset($_SESSION['loggedin']))
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Login</title>
-        <link rel="stylesheet" href="styles/style.css">
-        <link rel="stylesheet" href="styles/login.css">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-	</head>
-	<body>
-		<div class="login">
-			<h1>Login</h1>
-			<form action="authenticate.php" method="post">
-				<label for="username">
-					<i class="fas fa-user"></i>
-				</label>
-				<input type="text" name="username" placeholder="Username" id="username" required>
-				<label for="password">
-					<i class="fas fa-lock"></i>
-				</label>
-				<input type="password" name="password" placeholder="Password" id="password" required>
-				<input type="password" name="passwordHash" style="display: none;">
-				<input type="submit" value="Login">
-			</form>
-		</div>
-	</body>
+
+<head>
+	<meta charset="utf-8">
+	<title>Login</title>
+	<link rel="stylesheet" href="styles/style.css">
+	<link rel="stylesheet" href="styles/login.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+</head>
+
+<body>
+	<div class="login">
+		<h1 class="text-center">Login</h1>
+		<form action="authenticate.php" method="post">
+
+			<div class="container">
+				<input type="text" placeholder="Username" name="uname" required>
+				<input type="password" placeholder="Password" name="psw" required>
+				<button type="submit">Login</button>
+			</div>
+
+		</form>
+	</div>
+</body>
+
 </html>

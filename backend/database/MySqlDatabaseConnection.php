@@ -45,9 +45,16 @@ class MySqlDatabaseConnection implements IDatabaseConnection
     $values = substr($values, 0, -2);
 
     $query = "INSERT INTO `$tableName` ($keys) VALUES ($values)";
-
-    $result = $this->connection->query($query);
-    return $result;
+    try
+    {
+      $result = $this->connection->query($query);
+      return $result;
+    }
+    catch (Exception $e)
+    {
+      return $e->getMessage();
+    }
+    
   }
 
   public function ReadRows($tableName)
@@ -62,7 +69,7 @@ class MySqlDatabaseConnection implements IDatabaseConnection
 
       return $objects;
     } catch (Exception $e) {
-      return false;
+      return $e->getMessage();
     }
   }
 
@@ -75,7 +82,7 @@ class MySqlDatabaseConnection implements IDatabaseConnection
       return $row;
       
     } catch (Exception $e) {
-      return false;
+      return $e->getMessage();
     }
   }
 
@@ -95,8 +102,16 @@ class MySqlDatabaseConnection implements IDatabaseConnection
     $query .= $setProperties;
     $query .= " WHERE id=$id";
 
-    $result = $this->connection->query($query);
-    return $result;
+    try
+    {
+      $result = $this->connection->query($query);
+      return $result;
+    }
+    catch (Exception $e)
+    {
+      return $e->getMessage();
+    }
+    
   }
 
   public function DeleteData(string $tableName, int $entityId)
@@ -105,7 +120,7 @@ class MySqlDatabaseConnection implements IDatabaseConnection
       $this->connection->query("DELETE FROM `$tableName` WHERE id=$entityId");
       return true;
     } catch (Exception $e) {
-      return false;
+      return $e->getMessage();
     }
   }
 
@@ -115,7 +130,7 @@ class MySqlDatabaseConnection implements IDatabaseConnection
       $result = $this->connection->query($query);
       return $result;
     } catch (Exception $e) {
-      return false;
+      return $e->getMessage();
     }
   }
 }
