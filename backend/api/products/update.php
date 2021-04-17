@@ -11,7 +11,7 @@
   
     // instantiate database and product object
     $dbWorker = DatabaseWorkerFactory::GetMySqlDatabaseWorker("localhost", "root", "", "jurec_sanja");
-    $id = isset($_GET['id']) ? $_GET['id'] : die();
+    $id = !empty($_GET['id']) ? $_GET['id'] : die();
     $product = $dbWorker->Read('products', $id);
 
     if (isset($product))

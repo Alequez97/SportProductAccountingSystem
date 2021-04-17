@@ -24,8 +24,8 @@ if (isset($_SESSION['loggedin'])) {
 		<form action="authenticate.php" method="post">
 
 			<div class="container">
-				<input type="text" placeholder="Username" name="uname" required>
-				<input type="password" placeholder="Password" name="psw" required>
+				<input type="text" placeholder="Username" name="username" required>
+				<input type="password" placeholder="Password" name="password" required>
 				<button type="submit">Login</button>
 			</div>
 

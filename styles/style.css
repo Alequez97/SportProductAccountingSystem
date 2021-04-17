@@ -15,8 +15,57 @@
 
 h1 {
     font-family: 'Courier New', monospace;  
+    font-size: 40px;
+    font-weight:bold;
+    margin: 20px 0px;
 }
 
 .border {
     border: 1px solid black;
+}
+
+.span-link {
+    margin: 0 auto;
+    width: 150px;
+    display: block;
+}
+
+.span-link p {
+    text-align: center;
+    background-color:lightcyan;
+    padding: 10px 10px;
+    border-radius: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: ease-in-out .2s;
+}
+
+.span-link p:hover {
+    background-color: lightblue;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    cursor: pointer;
+}
+
+.span-link p:active {
+    background-color: lightskyblue;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+#clear-basket-button {
+    position: relative;
+    top:20px;
+    text-decoration: none;
+    margin-top: 20px;
+    background-color: lightpink;
+    color: white;
+    padding: 10px 10px;
+    border-radius: 15px;
+}
+
+#clear-basket-button:hover {
+    background-color: lightcoral;
+}
+
+#clear-basket-button:active {
+    background-color: red;
 }

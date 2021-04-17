@@ -22,11 +22,14 @@ $products = $dbWorker->ReadAll("products");
 
 <head>
     <title>Products</title>
+    <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/inventory.css">
     <link rel="stylesheet" href="styles/navigation-bar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="scripts/navigation-bar.js"></script>
+    <script src="ajax/products.js"></script>
 </head>
 
 <body>
@@ -74,22 +77,22 @@ $products = $dbWorker->ReadAll("products");
                         </thead>
                         <tbody>";
         foreach ($products as $product) {
-            echo "<tr>
-                            <td>
+            echo "<tr id=\"product-row-$product->id\">
+                            <td id=\"product-column-name-$product->id\">
                                 $product->name
                             </td>
-                            <td>
+                            <td id=\"product-column-color-$product->id\">
                                 $product->color
                             </td>
-                            <td>
+                            <td id=\"product-column-quantity-$product->id\">
                                 $product->quantity
                             </td>
                             <td>
                                 <a href=\"products/details/$product->id/\">Details</a>
                             </td>
-                            <td>
-                                <button>Edit</button>
-                                <button>Delete</button>
+                            <td id=\"actions-$product->id\">
+                                <button onclick=\"showEditBar($product->id)\">Edit</button>
+                                <button onclick=\"deleteProduct($product->id, '$product->name', '$product->color')\">Delete</button>
                             </td>
                         </tr>";
         }

@@ -16,6 +16,7 @@
 
     if (isset($product))
     {
+        $dbWorker->Delete('products', $id);
         http_response_code(200);
         echo json_encode(array("message" => "Product successfully deleted", "id" => $id));
     }

@@ -82,6 +82,7 @@ function deleteProductAjax(id) {
         }
     });
 }
+"<div>Icons made by <a href=\"https://www.flaticon.com/authors/pixel-perfect\" title=\"Pixel perfect\">Pixel perfect</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a></div>"
 
 function getRowFromProduct(result) {
     console.log(result);
@@ -89,7 +90,7 @@ function getRowFromProduct(result) {
                     "<td><input id=\"newName\" style=\"width:100px\" value=\"" + result.name + "\" class=\"text-center\"></td>" +
                     "<td><input id=\"newColor\" style=\"width:100px\" value=\"" + result.color + "\" class=\"text-center\"></td>" +
                     "<td><input id=\"newQuantity\" style=\"width:100px\" value=\"" + result.quantity + "\" class=\"text-center\"></td>" +
-                    "<td></td>" +
+                "<td></td>" +
                     "<td><input type=\"submit\" onclick=\"updateProduct(" + result.id + ")\" style=\"width:100px\" value=\"Save\" class=\"text-center\"></td>" +
                  "</tr>";
 
