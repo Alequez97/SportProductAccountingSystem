@@ -37,6 +37,8 @@ $productsInTransaction = explode(",", $transaction->details);
 
         <h1>Order id=<?php echo $_GET["id"] . " details" ?></h1>
 
+        <p>Type: <?php echo $transaction->type ?>
+
         <p style="margin: 20px;"><?php echo date("d-m-Y H:i", strtotime($transaction->creation_date)) ?> </p>
 
         <?php

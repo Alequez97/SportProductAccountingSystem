@@ -47,15 +47,22 @@ if (!isset($_SESSION['loggedin'])) {
         echo "</thead>";
 
         echo "<tbody>";
+
+        $totalBalance  = 0;
+
         foreach ($transactions as $transaction) {
             echo "<tr>";
             echo "<td>" . date("d-m-Y H:i", strtotime($transaction->creation_date)) . "</td>"; 
             echo "<td>" . $transaction->type . "</td>"; 
             echo "<td>" . $transaction->price . "</td>"; 
             echo "<td><a href=\"orderdetails?id=$transaction->id\">Details<a></td>"; 
+
+            $totalBalance = ($transaction->type === "buy") ? $totalBalance - $transaction->price : $totalBalance += $transaction->price; 
         }
         echo "</tbody>";
         echo "</table>";
+
+        echo "<h1 style=\"font-size: 30px; font-style:italic\">Total balance: " . $totalBalance . "</h1>";
 
         ?>
     </div>

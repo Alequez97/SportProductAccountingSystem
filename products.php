@@ -39,7 +39,6 @@ $products = $dbWorker->ReadAll("products");
         <a href="add">Add</a>
         <a href="remove">Remove</a>
         <a href="history">History</a>
-        <a href="balance">Balance</a>
         <a href="logout" id="logout">Logout</a>
         <a href="javascript:void(0);" class="icon" onclick="showNavigationBar()">
             <span class="fa fa-bars"></span>
