@@ -1,10 +1,9 @@
 <?php
-    session_start();
-    if (!isset($_SESSION['loggedin']))
-    {
-        header('Location: index');
-        exit;
-    }
+session_start();
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: index');
+    exit;
+}
 
 ?>
 
@@ -15,12 +14,53 @@
     <title>Balance</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/inventory.css">
 </head>
 
 <body>
     <div class="container text-center">
         <h1>History</h1>
+
+        <?php
+
+        include_once("backend/services/DatabaseWorkerFactory.php");
+
+        include_once("backend/interfaces/IDatabaseConnection.php");
+        include_once("backend/database/MySqlDatabaseConnection.php");
+
+        include_once("backend/interfaces/IDatabaseWorker.php");
+        include_once("backend/services/DatabaseWorker.php");
+
+        $dbWorker = DatabaseWorkerFactory::GetMySqlDatabaseWorker("localhost", "root", "", "jurec_sanja");
+        $transactions = $dbWorker->ReadAll("transactions");
+
+        echo "<table>";
+        echo "<thead>";
+
+        echo "<tr>";
+        echo "<th>Date</th>";
+        echo "<th>Type</th>";
+        echo "<th>Price</th>";
+        echo "<th>Details</th>";
+        echo "</tr>";
+
+        echo "</thead>";
+
+        echo "<tbody>";
+        foreach ($transactions as $transaction) {
+            echo "<tr>";
+            echo "<td>" . date("d-m-Y H:i", strtotime($transaction->creation_date)) . "</td>"; 
+            echo "<td>" . $transaction->type . "</td>"; 
+            echo "<td>" . $transaction->price . "</td>"; 
+            echo "<td><a href=\"orderdetails?id=$transaction->id\">Details<a></td>"; 
+        }
+        echo "</tbody>";
+        echo "</table>";
+
+        ?>
     </div>
+
+
 </body>
 
 </html>

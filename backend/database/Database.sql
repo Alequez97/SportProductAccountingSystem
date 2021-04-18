@@ -26,12 +26,14 @@ CREATE TABLE IF NOT EXISTS `products` (
     FOREIGN KEY (`categoryId`) REFERENCES categories(`id`)
 );
 
+CREATE TABLE IF NOT EXISTS `transactions` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `price` DECIMAL(8, 2) NOT NULL,
+    `type` VARCHAR(50) NOT NULL,
+    `details` VARCHAR(10000),
+    `creation_date` DATETIME,
+    PRIMARY KEY (`id`)
+);
+
 INSERT INTO `categories` (`category`)
 VALUES ('Fitness'); 
-
-INSERT INTO `products` (`name`, `color`, `quantity`, `details`, `categoryId`)
-VALUES ('Resistance band', 'Green', 8, NULL, 1),
-('Resistance band', 'Purple', 8, NULL, 1),
-('Resistance band', 'Black', 8, NULL, 1),
-('Resistance band', 'Red', 8, NULL, 1),
-('Resistance band', 'Yellow', 8, NULL, 1);

@@ -24,6 +24,47 @@ if (!isset($_SESSION['loggedin'])) {
 
 <body>
 
+  <?php 
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST')
+    {
+      if (empty($_SESSION["cart_items"]))
+      {
+        echo "<div style=\"background-color:#FF8686; text-align:center; padding: 20px 0px; color: white;\">";
+        echo "Bad request. Add products to basket";
+        echo "</div>";
+      }
+      else
+      {
+
+        include_once("backend/services/DatabaseWorkerFactory.php");
+
+        include_once("backend/interfaces/IDatabaseConnection.php");
+        include_once("backend/database/MySqlDatabaseConnection.php");
+    
+        include_once("backend/interfaces/IDatabaseWorker.php");
+        include_once("backend/services/DatabaseWorker.php");
+
+        $details = "";
+
+        $products = $_SESSION["cart_items"];
+        foreach ($products as $product) {
+          $dbWorker = DatabaseWorkerFactory::GetMySqlDatabaseWorker("localhost", "root", "", "jurec_sanja");
+          $dbWorker->Create("products", ["name" => $product["name"], "color" => $product["color"], "quantity" => $product["quantity"]]);
+
+          $details .= "Name: " . $product["name"] . ", Color: " . $product["color"] . ", Quantity: " . $product["quantity"] . ",\n";
+        }
+
+        $dbWorker->Create("transactions", ["price" => $_POST["price"], "type" => "buy", "details" => trim($details), "creation_date" => date("Y-m-d h:i")]);
+
+        unset($_SESSION["cart_items"]);
+        echo "<script>window.location.href=\"products.php\"</script>";
+      }
+
+    }
+
+  ?>
+
   <h1 class="text-center">Add product</h2>
 
     <div class="container">
@@ -70,14 +111,11 @@ if (!isset($_SESSION['loggedin'])) {
           </span>
           <div id="basket" class="basket-info" style="display: none; margin: 20px 20px; text-align:center;">
             <?php
+
             if (!empty($_SESSION["cart_items"])) {
-
               printBasket(false);
-
             } else {
-
               printBasket(true);
-
             }
 
             function printBasket(bool $basketIsEmpty)
@@ -143,9 +181,7 @@ if (!isset($_SESSION['loggedin'])) {
             }
             ?>
 
-
           </div>
-
         </div>
 
         <div class="row">
@@ -153,7 +189,7 @@ if (!isset($_SESSION['loggedin'])) {
             <label for="country">Total Price</label>
           </div>
           <div class="col-75">
-            <input type="number" id="totalPrice" name="color" placeholder="Total Price" required min="0">
+            <input type="number" id="totalPrice" name="price" placeholder="Total Price" required min="0">
           </div>
         </div>
 
